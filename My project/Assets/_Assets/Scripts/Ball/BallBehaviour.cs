@@ -14,7 +14,7 @@ public class BallBehaviour : MonoBehaviour
 
     void Start()
     {
-        Vector3 initialDirection = new Vector3(1, 0, 0).normalized; 
+        Vector3 initialDirection = new Vector3(0.3f, 1, 0).normalized; 
 
         rb.velocity = initialDirection * speed; 
     }
