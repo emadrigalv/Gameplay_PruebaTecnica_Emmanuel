@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BlockBehaviour : MonoBehaviour
@@ -22,7 +23,7 @@ public class BlockBehaviour : MonoBehaviour
         // Defiune block health using ecauation (2*n + 1)
         blockHealthPoints = (2 * blockLevel) + 1;
 
-        colorHandler.InitializeBlockColor(blockHealthPoints);
+        colorHandler.InitializeBlockColor(blockLevel);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,9 +32,13 @@ public class BlockBehaviour : MonoBehaviour
         {
             blockHealthPoints--;
 
-            // TODO if blockHealthPoints = 0 Destroy game object
+            if (blockHealthPoints <= 0)
+            {
+                Destroy(gameObject);
 
-            colorHandler.ChangeColor(blockHealthPoints);
+                // TODO instance VFX block destroyed
+            }
+            else colorHandler.BlockHitAnimation();
         }
     }
 

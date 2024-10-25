@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8788345}
-  speed: 10
-  powerUpSpeed: 20
+  speed: 15
+  powerUpSpeed: 30
   speedUpTime: 5
 --- !u!135 &8788347
 SphereCollider:
@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 8788344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.19, y: 1.51, z: 0}
+  m_LocalPosition: {x: 11.91, y: 1.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRenderer: {fileID: 74940871}
-  colorTransitionDuration: 0.5
+  transitionDuration: 0.3
 --- !u!114 &74940874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRenderer: {fileID: 285669296}
-  colorTransitionDuration: 0.5
+  transitionDuration: 0.3
 --- !u!114 &285669294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRenderer: {fileID: 327292859}
-  colorTransitionDuration: 0.5
+  transitionDuration: 0.3
 --- !u!114 &327292862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1368,7 +1368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRenderer: {fileID: 1065976974}
-  colorTransitionDuration: 0.5
+  transitionDuration: 0.3
 --- !u!114 &1065976972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRenderer: {fileID: 1570391174}
-  colorTransitionDuration: 0.5
+  transitionDuration: 0.3
 --- !u!114 &1570391172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRenderer: {fileID: 1669586750}
-  colorTransitionDuration: 0.5
+  transitionDuration: 0.3
 --- !u!114 &1669586748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2224,7 +2224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e21bb936b3d32449b2a2d849f56461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  padelSpeed: 7
+  padelSpeed: 10
   minLimitX: 20
   maxLimitX: 40
 --- !u!1 &2046797826
@@ -2347,7 +2347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockRenderer: {fileID: 2046797829}
-  colorTransitionDuration: 0.5
+  transitionDuration: 0.3
 --- !u!114 &2046797832
 MonoBehaviour:
   m_ObjectHideFlags: 0

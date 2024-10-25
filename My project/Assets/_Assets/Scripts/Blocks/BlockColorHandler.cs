@@ -7,55 +7,73 @@ public class BlockColorHandler: MonoBehaviour
     [SerializeField] private Renderer blockRenderer;
 
     [Header("Parameters")]
-    [SerializeField] private float colorTransitionDuration = 0.5f;
+    [SerializeField] private float transitionDuration = 0.3f;
 
 
-    public void InitializeBlockColor(int blockHealthPoints)
+    public void InitializeBlockColor(int blockLevel)
     {
-        blockRenderer.material.color = GetNewColor(blockHealthPoints);
+        blockRenderer.material.color = GetNewColor(blockLevel);
     }
 
-    public void ChangeColor(int blockHealthPoints)
+    // Transition to a color with emission and go back to the current color, impact effect
+    public void BlockHitAnimation()
     {
-        Color endColor = GetNewColor(blockHealthPoints);
-        StartCoroutine(ColorLerpCoroutine(endColor));
+        StartCoroutine(EmissionTransitionCoroutine());
     }
 
-    private Color GetNewColor(int blockHealthPoints)
+    private Color GetNewColor(int blockLevel)
     {
-        switch (blockHealthPoints)
+        switch (blockLevel)
         {
-            case 1:
-                return new Color(0.8f, 0.9f, 0.8f); // Difficulty Level 1, 1 hit to destroy
-            case 2:
-                return new Color(0.9f, 0.8f, 0.6f); // Difficulty Level 2, 2 hit to destroy
-            case 3:
-                return new Color(0.9f, 0.7f, 0.8f); // Difficulty Level 3, 3 hit to destroy
-            case 4:
-                return new Color(0.7f, 0.8f, 0.9f); // Difficulty Level 4, 4 hit to destroy
-            case 5:
-                return new Color(0.9f, 0.9f, 0.6f); // Difficulty Level 5, 5 hit to destroy
+            case 1: // Green
+                return new Color(0.6f, 1f, 0.6f); // Difficulty Level 1, 1 hit to destroy
+            case 2: // Yellow
+                return new Color(1f, 1f, 0.6f); // Difficulty Level 2, 3 hit to destroy
+            case 3: // Pink
+                return new Color(1f, 0.8f, 0.86f); // Difficulty Level 3, 5 hit to destroy
             default:
                 return Color.white; //block health points out of range, Error!
         }
     }
 
-    private IEnumerator ColorLerpCoroutine(Color endColor)
+    private IEnumerator EmissionTransitionCoroutine()
+    {
+
+        blockRenderer.material.EnableKeyword("_EMISSION");
+
+        Color initialEmissionColor = Color.black;
+        Color targetEmissionColor = blockRenderer.material.color;
+
+        yield return StartCoroutine(EmissionColorTransition(transitionDuration, initialEmissionColor, targetEmissionColor));
+
+        blockRenderer.material.SetColor("_EmissionColor", targetEmissionColor);
+
+        yield return StartCoroutine(EmissionColorTransition(transitionDuration, targetEmissionColor, initialEmissionColor));
+
+        blockRenderer.material.DisableKeyword("_EMISSION");
+    }
+
+    /// <summary>
+    /// Transitions the emission from color a to color b in the duration provided
+    /// </summary>
+    /// <param name="duration"></param>The time in seconds it takes to complete the transition.
+    /// <param name="a"></param>The initial color of the emission
+    /// <param name="b"></param>The target emission color
+    private IEnumerator EmissionColorTransition(float duration, Color a, Color b)
     {
         float elapsedTime = 0f;
-        Color currentColor = blockRenderer.material.color;
 
-        while (elapsedTime < colorTransitionDuration)
+        while (elapsedTime < duration)
         {
+
+            float t = elapsedTime / duration;
+
+            Color currentEmissionColor = Color.Lerp(a, b, t);
+            blockRenderer.material.SetColor("_EmissionColor", currentEmissionColor);
+
             elapsedTime += Time.deltaTime;
-
-            float t = elapsedTime / colorTransitionDuration; //Interpolation value
-
-            blockRenderer.material.color = Color.Lerp(currentColor, endColor, t);
 
             yield return null;
         }
-
-        blockRenderer.material.color = endColor;
     }
 }
