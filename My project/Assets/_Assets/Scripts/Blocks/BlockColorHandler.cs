@@ -25,12 +25,12 @@ public class BlockColorHandler: MonoBehaviour
     {
         switch (blockLevel)
         {
-            case 1: // Green
+            case 0: // Green
                 return new Color(0.6f, 1f, 0.6f); // Difficulty Level 1, 1 hit to destroy
-            case 2: // Yellow
+            case 1: // Yellow
                 return new Color(1f, 1f, 0.6f); // Difficulty Level 2, 3 hit to destroy
-            case 3: // Pink
-                return new Color(1f, 0.8f, 0.86f); // Difficulty Level 3, 5 hit to destroy
+            case 2: // Pink
+                return new Color(1f, 0.6f, 0.7f); // Difficulty Level 3, 5 hit to destroy
             default:
                 return Color.white; //block health points out of range, Error!
         }

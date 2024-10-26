@@ -10,14 +10,10 @@ public class BallBehaviour : MonoBehaviour
     [SerializeField] private Rigidbody rb;
 
     [Header("Parameters")]
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float powerUpSpeed = 20f;
-    [SerializeField] private float speedUpTime = 5f;
-
-    void Start()
-    {
-
-    }
+    [SerializeField] private float speed = 15f;
+    [SerializeField] private float minAxisVelocity = 4;
+    [SerializeField] private float newAxisVelocity = 7;
+    public float Speed { get { return speed; } private set { } }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -29,37 +25,19 @@ public class BallBehaviour : MonoBehaviour
     {
         Vector3 velocity = rb.velocity;
 
-        if (Mathf.Abs(velocity.x) < 0.2f)
+        // Verify horizontal velocity is not too low
+        if (Mathf.Abs(velocity.x) < minAxisVelocity)
         {
-            velocity.x = Mathf.Sign(velocity.x) * 0.7f;
+            velocity.x = Mathf.Sign(velocity.x) * newAxisVelocity; 
         }
 
-        if (Mathf.Abs(velocity.y) < 0.2f)
+        //Verify vertical velocity is not too low
+        if (Mathf.Abs(velocity.y) < minAxisVelocity)
         {
-            velocity.y = Mathf.Sign(velocity.y) * 0.7f;
+            velocity.y = Mathf.Sign(velocity.y) * newAxisVelocity;
         }
 
-        rb.velocity = velocity;
-    }
-
-    [ContextMenu("Speed Up")]
-    public void SpeedUp()
-    {
-        StartCoroutine(SpeedUpCoroutine());
-    }
-
-    private IEnumerator SpeedUpCoroutine()
-    {
-        SetVelocity(powerUpSpeed);
-        yield return new WaitForSeconds(speedUpTime);
-        SetVelocity(speed);
-    }
-
-    private void SetVelocity(float newSpeed)
-    {
-        Vector3 currentDirection = rb.velocity.normalized;
-
-        rb.velocity = currentDirection * newSpeed;
+        rb.velocity = (velocity.magnitude > speed) ? velocity.normalized * speed : velocity;
     }
 
     [ContextMenu("Initialize ball")]
@@ -69,7 +47,7 @@ public class BallBehaviour : MonoBehaviour
 
         transform.SetParent(paddle.transform);
 
-        transform.localPosition = new(0, 1.5f, 0);
+        transform.localPosition = new(0, 1.1f, 0);
     }
 
     [ContextMenu("Launch ball")]
