@@ -34,9 +34,10 @@ public class BlockBehaviour : MonoBehaviour
 
             if (blockHealthPoints <= 0)
             {
-                Destroy(gameObject);
-
                 // TODO instance VFX block destroyed
+                Pooler.instance.SpawnFromPool("VFX_Pink", transform.position);
+
+                Destroy(gameObject);
             }
             else colorHandler.BlockHitAnimation();
         }
