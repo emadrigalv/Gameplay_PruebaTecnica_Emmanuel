@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PadelController : MonoBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] private BallBehaviour ball;
+
     [Header("Parameters")]
     [SerializeField] private float padelSpeed = 7f;
     [SerializeField] private float minLimitX = 20f;
@@ -12,28 +15,38 @@ public class PadelController : MonoBehaviour
 
     private PlayerControls playerControls;
 
-    private InputAction move;
-    private InputAction fire;
+    public bool ballAttached;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
     }
 
+    private void Start()
+    {
+        ball.StickBallToPaddle();
+        ballAttached = true;
+    }
+
     private void OnEnable()
     {
-        move = playerControls.Player.Move;
-        move.Enable();
+        playerControls.Enable();
+        playerControls.Player.Fire.started += Fire;
     }
 
     private void OnDisable()
     {
-        move.Disable();
+        playerControls.Disable();
     }
 
     private void Update()
     {
-        Vector2 input = move.ReadValue<Vector2>();
+        HandleMove();
+    }
+
+    private void HandleMove()
+    {
+        Vector2 input = playerControls.Player.Move.ReadValue<Vector2>();
 
         Vector3 movePadel = new Vector3(input.x, 0, 0) * padelSpeed * Time.deltaTime;
 
@@ -45,6 +58,13 @@ public class PadelController : MonoBehaviour
 
         transform.position = clampedPosition;
     }
+
+    private void Fire(InputAction.CallbackContext context)
+    {
+        ball.LaunchBall();
+        ballAttached = false;
+    }
+
 
 
 }
