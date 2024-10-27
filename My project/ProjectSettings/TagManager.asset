@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ball
   - Power Up
+  - Collision Plane
+  - Fall
   layers:
   - Default
   - TransparentFX

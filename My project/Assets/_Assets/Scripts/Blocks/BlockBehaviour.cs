@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -9,7 +10,10 @@ public class BlockBehaviour : MonoBehaviour
     [SerializeField] private BlockColorHandler colorHandler;
 
     [Header("Parameters")]
-    [SerializeField] [Range(0,2)] private int blockLevel;
+    [SerializeField, Range(0,2)] private int blockLevel;
+    [SerializeField] private int powerUpChance = 4;
+    [SerializeField] private string vfxTag;
+    [SerializeField] private List<string> powerUpsList;
 
     private int blockHealthPoints;
 
@@ -34,13 +38,26 @@ public class BlockBehaviour : MonoBehaviour
 
             if (blockHealthPoints <= 0)
             {
-                // TODO instance VFX block destroyed
-                Pooler.instance.SpawnFromPool("VFX_Pink", transform.position);
+                // TODO update score
 
+                Pooler.instance.SpawnFromPool(vfxTag, transform.position);
+                ChanceToPowerUp();
                 Destroy(gameObject);
             }
             else colorHandler.BlockHitAnimation();
         }
+    }
+
+    private void ChanceToPowerUp()
+    {
+        int randomNumber = Random.Range(1, (powerUpChance + 1));
+        int randomPowerUp = Random.Range(0, powerUpsList.Count);
+
+        if (randomNumber == 1)
+        {
+            Pooler.instance.SpawnFromPool(powerUpsList[randomPowerUp], transform.position);
+        }
+        else return;
     }
 
 }

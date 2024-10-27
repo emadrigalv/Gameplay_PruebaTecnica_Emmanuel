@@ -10,8 +10,8 @@ public class PadelController : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] private float padelSpeed = 7f;
-    [SerializeField] private float minLimitX = 20f;
-    [SerializeField] private float maxLimitX = 40f;
+    [SerializeField] private float minLimitX;
+    [SerializeField] private float maxLimitX;
 
     private PlayerControls playerControls;
 
@@ -54,7 +54,7 @@ public class PadelController : MonoBehaviour
 
         //Restrict paddle movement on the x-axis between the minimum and maximum limits.
         Vector3 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minLimitX, maxLimitX);
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minLimitX + transform.localScale.x/2, maxLimitX - transform.localScale.x / 2);
 
         transform.position = clampedPosition;
     }

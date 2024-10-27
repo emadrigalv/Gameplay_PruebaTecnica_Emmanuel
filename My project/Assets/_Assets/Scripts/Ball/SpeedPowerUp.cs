@@ -13,6 +13,7 @@ public class SpeedPowerUp : PowerUpBase
     [SerializeField] private float powerUpTime = 5f;
 
     private float normalSpeed;
+    private bool isActive;
 
     private void Awake()
     {
@@ -22,7 +23,8 @@ public class SpeedPowerUp : PowerUpBase
     [ContextMenu("Speed Down Power Up")]
     public override void StartPowerUp()
     {
-        StartCoroutine(SpeedUpCoroutine());
+        if (isActive) return;
+        else StartCoroutine(SpeedUpCoroutine());
     }
 
     private IEnumerator SpeedUpCoroutine()
@@ -30,6 +32,7 @@ public class SpeedPowerUp : PowerUpBase
         SetVelocity(powerUpSpeed);
         yield return new WaitForSeconds(powerUpTime);
         SetVelocity(normalSpeed);
+        isActive = false;
     }
 
     private void SetVelocity(float newSpeed)

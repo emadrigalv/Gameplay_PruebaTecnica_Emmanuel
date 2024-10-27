@@ -52,9 +52,8 @@ public class Pooler : MonoBehaviour
 
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
-        objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
-        //objectToSpawn.GetComponent<IPooledObject>().OnObjectSpawn();
+        objectToSpawn.SetActive(true);
 
         poolDictionary[tag].Enqueue(objectToSpawn);
 

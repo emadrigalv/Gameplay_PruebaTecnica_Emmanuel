@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,10 @@ public class PowerUpCollector : MonoBehaviour
         {
             Debug.Log("Si");
 
-            int powerCollectedID =  collision.gameObject.GetComponent<Item>().ID;
+            Item itemCollected = collision.gameObject.GetComponent<Item>();
+            itemCollected.ItemPicked();
+
+            int powerCollectedID = itemCollected.ID;
 
             PowerUpBase power = powerUps[powerCollectedID];
 
