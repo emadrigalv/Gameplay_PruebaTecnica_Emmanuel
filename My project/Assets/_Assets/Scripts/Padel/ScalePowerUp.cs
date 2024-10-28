@@ -10,16 +10,32 @@ public class ScalePowerUp : PowerUpBase
 
     private bool isActive = false;
 
+    private Vector3 initialScale;
+
+    private Coroutine coroutine;
+
+    private void Awake()
+    {
+        initialScale = transform.localScale;
+    }
+
     [ContextMenu("Scale Up")]
     public override void StartPowerUp()
     {
         if (isActive) return;
-        else StartCoroutine(ScaleUpCoroutine());
+        else coroutine = StartCoroutine(ScaleUpCoroutine());
+    }
+
+    public override void StopPowerUp()
+    {
+        if (!isActive) return;
+        StopCoroutine(coroutine);
+        transform.localScale = initialScale;
+        isActive = false;
     }
 
     private IEnumerator ScaleUpCoroutine()
     {
-        Vector3 initialScale = transform.localScale;
         Vector3 targetScale = new(scaleUpX, 1, 1);
 
         yield return StartCoroutine(ScaleTransition(scaleTransitionTime, initialScale, targetScale));

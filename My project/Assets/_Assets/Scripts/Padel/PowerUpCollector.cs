@@ -24,4 +24,12 @@ public class PowerUpCollector : MonoBehaviour
             power.StartPowerUp();
         }  
     }
+
+    public void StopPowerUps()
+    {
+        foreach(PowerUpBase power in powerUps)
+        {
+            power.StopPowerUp();
+        }
+    }
 }

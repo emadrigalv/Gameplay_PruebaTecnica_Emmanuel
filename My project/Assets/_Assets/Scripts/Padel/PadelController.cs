@@ -6,6 +6,7 @@ public class PadelController : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private BallBehaviour ball;
+    [SerializeField] private PowerUpCollector collector;
 
     [Header("Parameters")]
     [SerializeField] private string deathVfxTag;
@@ -90,12 +91,14 @@ public class PadelController : MonoBehaviour
         AudioManager.instance.Play(deathSfxTag);
         CameraShake.instance.ShakeCamera(shakeIntensity, shakeDuration);
 
+        collector.StopPowerUps();
+
         yield return new WaitForSeconds(deathAnimTime);
 
         ball.gameObject.SetActive(true);
         ball.StickBallToPaddle();
 
-        isAlive = false; // to verify
+        isAlive = true; // to verify
     }
 
 }

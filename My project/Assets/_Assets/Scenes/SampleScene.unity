@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 30ff7bdff363a8c498ad984732f41e46, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a7b22a5c907622143b0debaa99e5b209, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -982,8 +982,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.06713815, y: 0.0059826877, z: 0.00040407616, w: 0.99772567}
-  m_LocalPosition: {x: 3.1708179, y: 5.0546665, z: -28.417542}
+  m_LocalRotation: {x: -0.013221677, y: -0.0015035169, z: 0.0000007992153, w: 0.99991155}
+  m_LocalPosition: {x: 9.314959, y: 7.694572, z: -25.839844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1860,7 +1860,7 @@ Transform:
   m_GameObject: {fileID: 822483935}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.4, z: -0.20242244}
+  m_LocalPosition: {x: 0, y: -1.55, z: -0.20242244}
   m_LocalScale: {x: 2.3424, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2526,8 +2526,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339623438}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.06713815, y: 0.0059826877, z: 0.00040407616, w: 0.99772567}
-  m_LocalPosition: {x: 3.1708179, y: 5.0546665, z: -28.417542}
+  m_LocalRotation: {x: -0.013221677, y: -0.0015035169, z: 0.0000007992153, w: 0.99991155}
+  m_LocalPosition: {x: 9.314959, y: 7.694572, z: -25.839844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3651,6 +3651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 8788346}
+  collector: {fileID: 0}
   deathVfxTag: Explosion
   deathSfxTag: SFX_PlayerLose
   deathAnimTime: 1

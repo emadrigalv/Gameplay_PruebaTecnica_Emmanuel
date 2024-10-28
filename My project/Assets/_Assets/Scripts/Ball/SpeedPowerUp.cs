@@ -14,6 +14,8 @@ public class SpeedPowerUp : PowerUpBase
     private float normalSpeed;
     private bool isActive;
 
+    private Coroutine coroutine;
+
     private void Awake()
     {
         normalSpeed = ballBehaviour.Speed;
@@ -23,7 +25,15 @@ public class SpeedPowerUp : PowerUpBase
     public override void StartPowerUp()
     {
         if (isActive) return;
-        else StartCoroutine(SpeedUpCoroutine());
+        else coroutine = StartCoroutine(SpeedUpCoroutine());
+    }
+
+    public override void StopPowerUp()
+    {
+        if (!isActive) return;
+        StopCoroutine(coroutine);
+        SetVelocity(normalSpeed);
+        isActive = false;
     }
 
     private IEnumerator SpeedUpCoroutine()
