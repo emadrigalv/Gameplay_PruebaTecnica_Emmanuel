@@ -5,7 +5,6 @@ public class BallBehaviour : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private PadelController paddle;
     [SerializeField] private Rigidbody rb;
-    //public MeshRenderer ballRenderer;
 
     [Header("Parameters")]
     [SerializeField] private float speed = 15f;

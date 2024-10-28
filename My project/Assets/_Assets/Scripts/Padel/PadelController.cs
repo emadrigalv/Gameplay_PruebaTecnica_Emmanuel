@@ -6,7 +6,6 @@ public class PadelController : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private BallBehaviour ball;
-    //[SerializeField] private MeshRenderer padelRenderer;
 
     [Header("Parameters")]
     [SerializeField] private string deathVfxTag;
