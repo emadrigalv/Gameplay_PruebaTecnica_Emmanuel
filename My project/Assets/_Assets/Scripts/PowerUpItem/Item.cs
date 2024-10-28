@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -53,6 +52,13 @@ public class Item : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Transitions de original scale to a small scale to reproduce a desappearing effect
+    /// </summary>
+    /// <param name="duration"></param>Effect duration
+    /// <param name="startScale"></param>Original scale
+    /// <param name="finalScale"></param>Final scale before desappear the object
+    /// <returns></returns>
     private IEnumerator DesappearingCoroutine(float duration, Vector3 startScale, Vector3 finalScale)
     {
         float elapsedTime = 0f;

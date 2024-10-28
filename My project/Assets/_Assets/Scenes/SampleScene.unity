@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paddle: {fileID: 1959463498}
   rb: {fileID: 8788345}
+  ballRenderer: {fileID: 8788348}
   speed: 25
   minAxisVelocity: 4
   newAxisVelocity: 7
@@ -428,74 +429,6 @@ MonoBehaviour:
   powerUpChance: 0
   vfxTag: 
   powerUpsList: []
---- !u!1001 &87656331
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1780955541421728223, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_Name
-      value: Scale Power Up
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 10.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789952229949649317, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a2090a8f2f9fbb74e9b7d1917917e9c0, type: 3}
 --- !u!1001 &90069451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1729,6 +1662,10 @@ MonoBehaviour:
     prefab: {fileID: 1780955541421728223, guid: a2090a8f2f9fbb74e9b7d1917917e9c0,
       type: 3}
     size: 3
+  - tag: Explosion
+    prefab: {fileID: 7180398067815847887, guid: 95808f5de8d652841b7575babaa1e654,
+      type: 3}
+    size: 2
 --- !u!4 &799233839
 Transform:
   m_ObjectHideFlags: 0
@@ -3444,10 +3381,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 8788346}
+  padelRenderer: {fileID: 1959463495}
+  deathVfxTag: Explosion
+  deathAnimTime: 1
   padelSpeed: 20
   minLimitX: -11.5
   maxLimitX: 11.5
   ballAttached: 0
+  isAlive: 1
 --- !u!114 &1959463499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3838,4 +3779,3 @@ SceneRoots:
   - {fileID: 8788350}
   - {fileID: 799233839}
   - {fileID: 929970877}
-  - {fileID: 87656331}

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
@@ -7,6 +5,7 @@ public class BallBehaviour : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private PadelController paddle;
     [SerializeField] private Rigidbody rb;
+    //public MeshRenderer ballRenderer;
 
     [Header("Parameters")]
     [SerializeField] private float speed = 15f;
@@ -16,7 +15,13 @@ public class BallBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        AdjustBallAngle();
+        if (collision.gameObject.CompareTag("Fall")) paddle.PlayerDeath();
+
+        else
+        {
+            AdjustBallAngle();
+            //Sound
+        }
     }
 
     // Ball avoid horizontal and vertical movements
@@ -42,11 +47,13 @@ public class BallBehaviour : MonoBehaviour
     [ContextMenu("Initialize ball")]
     public void StickBallToPaddle()
     {
-        rb.velocity = Vector3.zero;
-
         transform.SetParent(paddle.transform);
 
         transform.localPosition = new(0, 1.1f, 0);
+
+        rb.velocity = Vector3.zero;
+
+        paddle.ballAttached = true;
     }
 
     [ContextMenu("Launch ball")]

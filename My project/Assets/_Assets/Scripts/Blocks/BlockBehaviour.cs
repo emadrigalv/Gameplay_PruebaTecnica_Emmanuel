@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BlockBehaviour : MonoBehaviour
@@ -39,12 +37,16 @@ public class BlockBehaviour : MonoBehaviour
             if (blockHealthPoints <= 0)
             {
                 // TODO update score
-
+                //Sound 
                 Pooler.instance.SpawnFromPool(vfxTag, transform.position);
                 ChanceToPowerUp();
                 Destroy(gameObject);
             }
-            else colorHandler.BlockHitAnimation();
+            else
+            {
+                colorHandler.BlockHitAnimation();
+                //Sound
+            }
         }
     }
 

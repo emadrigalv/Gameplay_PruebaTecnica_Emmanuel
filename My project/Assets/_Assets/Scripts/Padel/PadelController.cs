@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,15 +6,19 @@ public class PadelController : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private BallBehaviour ball;
+    //[SerializeField] private MeshRenderer padelRenderer;
 
     [Header("Parameters")]
-    [SerializeField] private float padelSpeed = 7f;
+    [SerializeField] private string deathVfxTag;
+    [SerializeField] private float deathAnimTime;
+    [SerializeField] private float padelSpeed;
     [SerializeField] private float minLimitX;
     [SerializeField] private float maxLimitX;
 
     private PlayerControls playerControls;
 
     public bool ballAttached;
+    public bool isAlive = true;
 
     private void Awake()
     {
@@ -41,11 +44,13 @@ public class PadelController : MonoBehaviour
 
     private void Update()
     {
-        HandleMove();
+            HandleMove();
     }
 
     private void HandleMove()
     {
+        if (!isAlive) return;
+
         Vector2 input = playerControls.Player.Move.ReadValue<Vector2>();
 
         Vector3 movePadel = new Vector3(input.x, 0, 0) * padelSpeed * Time.deltaTime;
@@ -61,10 +66,33 @@ public class PadelController : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext context)
     {
+        if (!isAlive || !ballAttached) return;
+
         ball.LaunchBall();
         ballAttached = false;
     }
 
+    public void PlayerDeath()
+    {
+        if(!isAlive) return;
 
+        StartCoroutine(DeathCoroutine());
+    }
+
+    private IEnumerator DeathCoroutine()
+    {
+        isAlive = false;
+        ball.gameObject.SetActive(false);
+
+        Pooler.instance.SpawnFromPool(deathVfxTag, transform.position - Vector3.forward);
+        // sound
+
+        yield return new WaitForSeconds(deathAnimTime);
+
+        ball.gameObject.SetActive(true);
+        ball.StickBallToPaddle();
+
+        isAlive = true; // to verify
+    }
 
 }
