@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class PowerUpCollector : MonoBehaviour
 {
+    [Header("Dependencies")]
     public List<PowerUpBase> powerUps;
+
+    [Header("Parameters")]
+    [SerializeField] private string sfxItemPickedTag;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -12,7 +16,7 @@ public class PowerUpCollector : MonoBehaviour
             Item itemCollected = collision.gameObject.GetComponent<Item>();
             itemCollected.ItemPicked();
 
-            //Sound
+            AudioManager.instance.Play(sfxItemPickedTag);
 
             int powerCollectedID = itemCollected.ID;
             PowerUpBase power = powerUps[powerCollectedID];

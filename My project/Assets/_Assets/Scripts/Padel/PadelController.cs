@@ -9,10 +9,13 @@ public class PadelController : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] private string deathVfxTag;
+    [SerializeField] private string deathSfxTag;
     [SerializeField] private float deathAnimTime;
     [SerializeField] private float padelSpeed;
     [SerializeField] private float minLimitX;
     [SerializeField] private float maxLimitX;
+    [SerializeField] private float shakeIntensity = 5;
+    [SerializeField] private float shakeDuration = 0.5f;
 
     private PlayerControls playerControls;
 
@@ -84,14 +87,15 @@ public class PadelController : MonoBehaviour
         ball.gameObject.SetActive(false);
 
         Pooler.instance.SpawnFromPool(deathVfxTag, transform.position - Vector3.forward);
-        // sound
+        AudioManager.instance.Play(deathSfxTag);
+        CameraShake.instance.ShakeCamera(shakeIntensity, shakeDuration);
 
         yield return new WaitForSeconds(deathAnimTime);
 
         ball.gameObject.SetActive(true);
         ball.StickBallToPaddle();
 
-        isAlive = true; // to verify
+        isAlive = false; // to verify
     }
 
 }

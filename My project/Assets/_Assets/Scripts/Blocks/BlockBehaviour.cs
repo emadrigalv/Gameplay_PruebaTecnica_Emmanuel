@@ -10,7 +10,11 @@ public class BlockBehaviour : MonoBehaviour
     [Header("Parameters")]
     [SerializeField, Range(0,2)] private int blockLevel;
     [SerializeField] private int powerUpChance = 4;
+    [SerializeField] private float shakeIntensity = 2;
+    [SerializeField] private float shakeDuration = 0.3f;
     [SerializeField] private string vfxTag;
+    [SerializeField] private string sfxBlockDestroyedTag;
+    [SerializeField] private string sfxBlockHitTag;
     [SerializeField] private List<string> powerUpsList;
 
     private int blockHealthPoints;
@@ -37,7 +41,8 @@ public class BlockBehaviour : MonoBehaviour
             if (blockHealthPoints <= 0)
             {
                 // TODO update score
-                //Sound 
+                CameraShake.instance.ShakeCamera(shakeIntensity, shakeDuration);
+                AudioManager.instance.Play(sfxBlockDestroyedTag); 
                 Pooler.instance.SpawnFromPool(vfxTag, transform.position);
                 ChanceToPowerUp();
                 Destroy(gameObject);
@@ -45,7 +50,7 @@ public class BlockBehaviour : MonoBehaviour
             else
             {
                 colorHandler.BlockHitAnimation();
-                //Sound
+                AudioManager.instance.Play(sfxBlockHitTag);
             }
         }
     }

@@ -5,10 +5,10 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager instance;
 
-    [SerializeField] private AudioMixerGroup _musicGroup;
-    [SerializeField] private AudioMixerGroup _sfxGroup;
+    [SerializeField] private AudioMixerGroup musicGroup;
+    [SerializeField] private AudioMixerGroup sfxGroup;
 
     private Sounds[] playingSounds;
 
@@ -17,9 +17,9 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -30,10 +30,10 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            if (s.name.StartsWith("M_") == true)
-                s.source.outputAudioMixerGroup = _musicGroup;
-            else if (s.name.StartsWith("SFX_") == true)
-                s.source.outputAudioMixerGroup = _sfxGroup;
+            if (s.soundName.StartsWith("M_") == true)
+                s.source.outputAudioMixerGroup = musicGroup;
+            else if (s.soundName.StartsWith("SFX_") == true)
+                s.source.outputAudioMixerGroup = sfxGroup;
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
-        Sounds s = Array.Find(sounds, sound => sound.name == name);
+        Sounds s = Array.Find(sounds, sound => sound.soundName == name);
         if (s == null)
         {
             Debug.LogWarning("Sound not found: " + name);
@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
 
     public void Stop(string name)
     {
-        Sounds s = Array.Find(sounds, sound => sound.name == name);
+        Sounds s = Array.Find(sounds, sound => sound.soundName == name);
         if (s == null)
         {
             Debug.LogWarning("Sound not found: " + name);
@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopAllSFX()
     {
-        playingSounds = sounds.Where(t => t.source.outputAudioMixerGroup == _sfxGroup).Where(p => p.source.isPlaying).ToArray();
+        playingSounds = sounds.Where(t => t.source.outputAudioMixerGroup == sfxGroup).Where(p => p.source.isPlaying).ToArray();
         if (playingSounds.Length == 0) return;
         foreach (Sounds sound in playingSounds)
             sound.source.Stop();

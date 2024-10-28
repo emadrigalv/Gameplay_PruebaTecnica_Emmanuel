@@ -122,7 +122,11 @@ MonoBehaviour:
   colorHandler: {fileID: 197570963829731076}
   blockLevel: 0
   powerUpChance: 5
+  shakeIntensity: 2
+  shakeDuration: 0.2
   vfxTag: VFX_Green
+  sfxBlockDestroyedTag: SFX_BlockExplosion
+  sfxBlockHitTag: SFX_BlockHit
   powerUpsList:
   - Speed
   - Scale

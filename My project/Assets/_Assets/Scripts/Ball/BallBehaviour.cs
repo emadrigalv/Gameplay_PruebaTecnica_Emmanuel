@@ -10,6 +10,7 @@ public class BallBehaviour : MonoBehaviour
     [SerializeField] private float speed = 15f;
     [SerializeField] private float minAxisVelocity = 4;
     [SerializeField] private float newAxisVelocity = 7;
+    [SerializeField] private string sfxBounceTag;
     public float Speed { get { return speed; } private set { } }
 
     private void OnCollisionEnter(Collision collision)
@@ -19,7 +20,7 @@ public class BallBehaviour : MonoBehaviour
         else
         {
             AdjustBallAngle();
-            //Sound
+            AudioManager.instance.Play(sfxBounceTag);
         }
     }
 
@@ -63,5 +64,7 @@ public class BallBehaviour : MonoBehaviour
         Vector3 initialDirection = new Vector3(0.5f, 1, 0).normalized;
 
         rb.velocity = initialDirection * speed;
+
+        AudioManager.instance.Play(sfxBounceTag);
     }
 }

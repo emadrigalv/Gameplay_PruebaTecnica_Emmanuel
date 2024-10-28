@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class Sounds : MonoBehaviour
+[System.Serializable]
+public class Sounds
 {
     public string soundName;
 
