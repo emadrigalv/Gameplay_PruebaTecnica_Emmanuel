@@ -85,20 +85,19 @@ public class PadelController : MonoBehaviour
     private IEnumerator DeathCoroutine()
     {
         isAlive = false;
+        collector.StopPowerUps();
         ball.gameObject.SetActive(false);
 
         Pooler.instance.SpawnFromPool(deathVfxTag, transform.position - Vector3.forward);
         AudioManager.instance.Play(deathSfxTag);
         CameraShake.instance.ShakeCamera(shakeIntensity, shakeDuration);
 
-        collector.StopPowerUps();
-
         yield return new WaitForSeconds(deathAnimTime);
 
         ball.gameObject.SetActive(true);
         ball.StickBallToPaddle();
 
-        isAlive = true; // to verify
+        isAlive = GameManager.instance.UpdateLives();
     }
 
 }

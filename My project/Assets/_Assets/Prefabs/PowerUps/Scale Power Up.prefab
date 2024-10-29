@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 181154552570984590}
   - component: {fileID: 79409514018667506}
   - component: {fileID: 6699957657322516644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Scale Power Up
   m_TagString: Power Up
   m_Icon: {fileID: 0}

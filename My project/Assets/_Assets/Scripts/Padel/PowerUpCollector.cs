@@ -4,6 +4,7 @@ using UnityEngine;
 public class PowerUpCollector : MonoBehaviour
 {
     [Header("Dependencies")]
+    [SerializeField] private PadelController paddle;
     public List<PowerUpBase> powerUps;
 
     [Header("Parameters")]
@@ -11,6 +12,8 @@ public class PowerUpCollector : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (!paddle.isAlive) return;
+
         if (collision.gameObject.CompareTag("Power Up"))
         {
             Item itemCollected = collision.gameObject.GetComponent<Item>();

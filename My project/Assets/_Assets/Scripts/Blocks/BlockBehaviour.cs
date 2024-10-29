@@ -18,6 +18,7 @@ public class BlockBehaviour : MonoBehaviour
     [SerializeField] private List<string> powerUpsList;
 
     private int blockHealthPoints;
+    private int score;
 
     void Start()
     {
@@ -26,8 +27,10 @@ public class BlockBehaviour : MonoBehaviour
 
     private void InitializeBlock()
     {
-        // Defiune block health using ecauation (2*n + 1)
+        // Define block health using ecauation (2*n + 1)
         blockHealthPoints = (2 * blockLevel) + 1;
+        // Define block health using ecauation (2*n + 1) * 10
+        score = blockHealthPoints * 10;
 
         colorHandler.InitializeBlockColor(blockLevel);
     }

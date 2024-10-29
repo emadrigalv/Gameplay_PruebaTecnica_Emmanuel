@@ -13,6 +13,7 @@ public class ScalePowerUp : PowerUpBase
     private Vector3 initialScale;
 
     private Coroutine coroutine;
+    private Coroutine currentTransitionCoroutine;
 
     private void Awake()
     {
@@ -23,13 +24,20 @@ public class ScalePowerUp : PowerUpBase
     public override void StartPowerUp()
     {
         if (isActive) return;
-        else coroutine = StartCoroutine(ScaleUpCoroutine());
+        else
+        {
+            isActive = true;
+            coroutine = StartCoroutine(ScaleUpCoroutine());
+        }
     }
 
     public override void StopPowerUp()
     {
         if (!isActive) return;
         StopCoroutine(coroutine);
+        
+        if (currentTransitionCoroutine != null) StopCoroutine(currentTransitionCoroutine);
+
         transform.localScale = initialScale;
         isActive = false;
     }
@@ -38,11 +46,15 @@ public class ScalePowerUp : PowerUpBase
     {
         Vector3 targetScale = new(scaleUpX, 1, 1);
 
-        yield return StartCoroutine(ScaleTransition(scaleTransitionTime, initialScale, targetScale));
+        currentTransitionCoroutine = StartCoroutine(ScaleTransition(scaleTransitionTime, initialScale, targetScale));
+        yield return currentTransitionCoroutine;
 
         yield return new WaitForSeconds(powerUpTime);
 
-        yield return StartCoroutine(ScaleTransition(scaleTransitionTime, targetScale, initialScale));
+        currentTransitionCoroutine = StartCoroutine(ScaleTransition(scaleTransitionTime, targetScale, initialScale));
+        yield return currentTransitionCoroutine;
+
+        currentTransitionCoroutine = null;
     }
 
     /// <summary>

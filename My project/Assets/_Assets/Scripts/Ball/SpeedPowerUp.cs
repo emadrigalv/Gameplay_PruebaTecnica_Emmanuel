@@ -24,8 +24,12 @@ public class SpeedPowerUp : PowerUpBase
     [ContextMenu("Speed Down Power Up")]
     public override void StartPowerUp()
     {
-        if (isActive) return;
-        else coroutine = StartCoroutine(SpeedUpCoroutine());
+        if (isActive || !gameObject.activeSelf) return;
+        else
+        {
+            isActive = true;
+            coroutine = StartCoroutine(SpeedUpCoroutine());
+        }
     }
 
     public override void StopPowerUp()
