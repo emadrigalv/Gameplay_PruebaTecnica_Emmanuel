@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
@@ -47,24 +48,31 @@ public class BallBehaviour : MonoBehaviour
     [ContextMenu("Initialize ball")]
     public void StickBallToPaddle()
     {
-        transform.SetParent(paddle.transform);
-
-        transform.localPosition = new(0, 1.1f, 0);
-
-        rb.velocity = Vector3.zero;
-
         paddle.ballAttached = true;
+        
+        StartCoroutine(StickToPaddelRoutine());
     }
 
     [ContextMenu("Launch ball")]
     public void LaunchBall()
     {
-        transform.SetParent(null);
 
         Vector3 initialDirection = new Vector3(0.5f, 1, 0).normalized;
 
         rb.velocity = initialDirection * speed;
 
         AudioManager.instance.Play(sfxBounceTag);
+    }
+
+    private IEnumerator StickToPaddelRoutine()
+    {
+        while (paddle.ballAttached)
+        {
+            transform.position = paddle.transform.position + new Vector3(0, 1.1f, 0);
+
+            rb.velocity = Vector3.zero;
+
+            yield return null;
+        }
     }
 }

@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     {
         blocksCount--;
         score += scoreGained;
-        uiManager.UpdateScoreHUD(scoreGained);
+        uiManager.UpdateScoreHUD(score);
 
         if (score > highScore) 
         {

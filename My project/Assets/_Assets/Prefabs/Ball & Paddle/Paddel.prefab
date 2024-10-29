@@ -205,7 +205,7 @@ MonoBehaviour:
   deathVfxTag: Explosion
   deathSfxTag: SFX_PlayerLose
   deathAnimTime: 1
-  padelSpeed: 22
+  padelSpeed: 24
   minLimitX: -14.5
   maxLimitX: 14.5
   shakeIntensity: 10

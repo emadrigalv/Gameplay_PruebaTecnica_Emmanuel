@@ -17,5 +17,6 @@ public class VolumeControl : MonoBehaviour
     {
         mainMixer.SetFloat(parameter, value);
         PlayerPrefs.SetFloat(parameter, value);
+        PlayerPrefs.Save();
     }
 }
