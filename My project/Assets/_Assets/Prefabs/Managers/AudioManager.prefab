@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250976d817417f44ca59d00077e8057f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicGroup: {fileID: 0}
-  sfxGroup: {fileID: 0}
+  musicGroup: {fileID: -412067392970416926, guid: b626901f7b479c04d85a92c16d848c14,
+    type: 2}
+  sfxGroup: {fileID: -4632608385389232350, guid: b626901f7b479c04d85a92c16d848c14,
+    type: 2}
   sounds:
   - soundName: SFX_BlockExplosion
     clip: {fileID: 8300000, guid: 5667cb3c07dcbb2419f2339b40e14216, type: 3}

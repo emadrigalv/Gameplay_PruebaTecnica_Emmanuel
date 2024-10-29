@@ -43,7 +43,7 @@ public class BlockBehaviour : MonoBehaviour
 
             if (blockHealthPoints <= 0)
             {
-                // TODO update score
+                GameManager.instance.UpdateScore(score);
                 CameraShake.instance.ShakeCamera(shakeIntensity, shakeDuration);
                 AudioManager.instance.Play(sfxBlockDestroyedTag); 
                 Pooler.instance.SpawnFromPool(vfxTag, transform.position);

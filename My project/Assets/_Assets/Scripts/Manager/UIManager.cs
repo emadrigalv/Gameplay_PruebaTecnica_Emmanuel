@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-internal class UIManager
+public class UIManager : MonoBehaviour
 {
     [Header("Pause")]
     [SerializeField] private GameObject pauseMenu;
