@@ -38,9 +38,6 @@ public class BlockColorHandler: MonoBehaviour
 
     private IEnumerator EmissionTransitionCoroutine()
     {
-
-        blockRenderer.material.EnableKeyword("_EMISSION");
-
         Color initialEmissionColor = Color.black;
         Color targetEmissionColor = blockRenderer.material.color;
 
@@ -49,8 +46,6 @@ public class BlockColorHandler: MonoBehaviour
         blockRenderer.material.SetColor("_EmissionColor", targetEmissionColor);
 
         yield return StartCoroutine(EmissionColorTransition(transitionDuration, targetEmissionColor, initialEmissionColor));
-
-        blockRenderer.material.DisableKeyword("_EMISSION");
     }
 
     /// <summary>
